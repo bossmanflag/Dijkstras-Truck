@@ -1,0 +1,11 @@
+DIJKSTRA'S ALGORITHM
+
+Dijkstra's algorithm is used to find the shortest distance between 2 vertices.
+
+1. Start with a weighted graph
+2. Choose a starting vertex and assign infinity path values to all other vertices
+3. Go to each vertex adjacent to this vertex and update its path length
+4. If the path length of the adjacent vertex is lesser than the new path length, do not update it
+5. Avoid updating path lengths of already visited vertices
+6. After each iteration,  choose the unvisited vertex with the least path length
+7. Repeat until all vertices have been visited
