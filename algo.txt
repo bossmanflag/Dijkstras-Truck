@@ -1,11 +1,20 @@
 DIJKSTRA'S ALGORITHM
 
-Dijkstra's algorithm is used to find the shortest distance between 2 vertices.
+ 
+Dijkstra's algorithm, published in 1959, is named after its discoverer Edsger Dijkstra, who was a Dutch computer scientist. This algorithm aims to find the shortest-path in a directed or undirected graph with non-negative edge weights.
 
-1. Start with a weighted graph
-2. Choose a starting vertex and assign infinity path values to all other vertices
-3. Go to each vertex adjacent to this vertex and update its path length
-4. If the path length of the adjacent vertex is lesser than the new path length, do not update it
-5. Avoid updating path lengths of already visited vertices
-6. After each iteration,  choose the unvisited vertex with the least path length
-7. Repeat until all vertices have been visited
+Step 1: Set dist[s]=0, S=ϕ // s is the source vertex and S is a 1-D array having all the visited vertices
+
+Step 2: For all nodes v except s, set dist[v]= ∞
+
+Step 3: find q not in S such that dist[q] is minimum // vertex q should not be visited
+
+Step 4: add q to S // add vertex q to S since it has now been visited
+
+Step 5: update dist[r] for all r adjacent to q such that r is not in S //vertex r should not be visited dist[r]=min(dist[r], dist[q]+cost[q][r]) //Greedy and Dynamic approach
+
+Step 6: Repeat Steps 3 to 5 until all the nodes are in S // repeat till all the vertices have been visited
+
+Step 7: Print array dist having shortest path from the source vertex u to all other vertices
+
+Step 8: Exit
