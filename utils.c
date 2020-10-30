@@ -8,43 +8,46 @@ typedef enum
 
 #define MAX_WEIGHT 9999999
 #define null NULL
-typedef struct _Node Node;
-typedef struct _Point Point;
+typedef struct _Edge Edge;
+typedef struct _Vertex Vertex;
 typedef struct _LinkedList LinkedList;
 
-struct _Node
+struct _Edge
 {
     int weight;
-    Point *to;
-    Node *next;
+    Vertex *to;
+    Edge *next;
 };
 
-struct _Point
+struct _Vertex
 {
-    char value;
-    LinkedList *edges;
+    char value;        // name of city
+    LinkedList *edges; // [edge1 , edge2, edge3... ]
+    // insert(edge3)
     bool visited;
     int smallestWeight;
 };
 
 struct _LinkedList
 {
-    Node *head;
-    Node *tail;
+    Edge *head;
+    Edge *tail;
 };
+// \     \
+//[1,2,3,4]
 
-Node *makeNode(int weight, Point *to)
+Edge *makeEdge(int weight, Vertex *to)
 {
-    Node *edge = (Node *)malloc(sizeof(Node));
+    Edge *edge = (Edge *)malloc(sizeof(Edge));
     edge->weight = weight;
     edge->to = to;
     edge->next = null;
     return edge;
 }
 
-Point *makePoint(char value)
+Vertex *makeVertex(char value)
 {
-    Point *vertex = (Point *)malloc(sizeof(Point));
+    Vertex *vertex = (Vertex *)malloc(sizeof(Vertex));
     vertex->value = value;
     vertex->edges = null;
     vertex->visited = false;
@@ -59,8 +62,9 @@ LinkedList *createLinkedList()
     list->tail = null;
     return list;
 }
+// []
 
-void insert(LinkedList *list, Node *edge)
+void insert(LinkedList *list, Edge *edge)
 {
     if (list->head == null)
     {
@@ -74,12 +78,12 @@ void insert(LinkedList *list, Node *edge)
     }
 }
 
-void visit(Point *vertex)
+void visit(Vertex *vertex)
 {
     vertex->visited = true;
 }
 
-bool isVisited(Point *vertex)
+bool isVisited(Vertex *vertex)
 {
     return vertex->visited;
 }

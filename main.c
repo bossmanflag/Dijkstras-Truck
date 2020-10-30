@@ -24,15 +24,15 @@ Todo -
 #define MAX_WEIGHT 9999999
 #define null NULL
 
-void dijkstra(Point *vertices[], int size, int from)
+void dijkstra(Vertex *vertices[], int size, int from)
 {
-    Point *toVisit[size], *current;
+    Vertex *toVisit[size], *current;
     int top = -1;
     toVisit[++top] = vertices[from];
     vertices[from]->smallestWeight = 0;
     while (current = toVisit[top--])
     {
-        Node *edge = current->edges->head;
+        Edge *edge = current->edges->head;
         while (edge != null)
         {
             int _wgt = current->smallestWeight + edge->weight;
@@ -47,26 +47,26 @@ void dijkstra(Point *vertices[], int size, int from)
             break;
     }
 }
-void printList(LinkedList *n)
-{
-    Node *nn = n->head;
-    while (nn != NULL)
-    {
-        printf("%d \t", nn->weight);
-        printf("%c \n", nn->to->value);
-        nn = nn->next;
-    }
-}
+// void printList(LinkedList *n)
+// {
+//     Edge *nn = n->head;
+//     while (nn != NULL)
+//     {
+//         printf("%d \t", nn->weight);
+//         printf("%c \n", nn->to->value);
+//         nn = nn->next;
+//     }
+// }
 
-const char G[][50] = {"Bangalore", "Mumbai", "Delhi", "Chennai", "Kolkata", "Patna", "Jaipur"};
+const char cites[][50] = {"Bangalore", "Mumbai", "Delhi", "Chennai", "Kolkata", "Patna", "Jaipur"};
 
 int main(int argc, char *argv[])
 {
-    int len = sizeof(G) / sizeof(G[0]), i;
-    Point *vertices[len];
+    int len = sizeof(cites) / sizeof(cites[0]), i;
+    Vertex *vertices[len];
     for (i = 0; i < len; i++)
     {
-        vertices[i] = makePoint(G[i][50]);
+        vertices[i] = makeVertex(cites[i][50]);
         //printf("%c : %d \n", vertices[i]->value, vertices[i]->smallestWeight);
     }
 
@@ -76,36 +76,36 @@ int main(int argc, char *argv[])
         switch (i)
         {
         case 0: //bangalore
-            insert(list, makeNode(840, vertices[1]));
-            insert(list, makeNode(260, vertices[3]));
-            insert(list, makeNode(1540, vertices[4]));
-            insert(list, makeNode(1580, vertices[5]));
+            insert(list, makeEdge(840, vertices[1]));
+            insert(list, makeEdge(260, vertices[3]));
+            insert(list, makeEdge(1540, vertices[4]));
+            insert(list, makeEdge(1580, vertices[5]));
             break;
         case 1: //mumbai
-            insert(list, makeNode(840, vertices[0]));
-            insert(list, makeNode(1163, vertices[2]));
-            insert(list, makeNode(1040, vertices[3]));
+            insert(list, makeEdge(840, vertices[0]));
+            insert(list, makeEdge(1163, vertices[2]));
+            insert(list, makeEdge(1040, vertices[3]));
             break;
         case 2: //delhi
-            insert(list, makeNode(1760, vertices[1]));
+            insert(list, makeEdge(1760, vertices[1]));
             break;
         case 3: //chennai
-            insert(list, makeNode(260, vertices[0]));
-            insert(list, makeNode(1040, vertices[1]));
+            insert(list, makeEdge(260, vertices[0]));
+            insert(list, makeEdge(1040, vertices[1]));
             break;
         case 4: //kolkata
-            insert(list, makeNode(1540, vertices[0]));
-            insert(list, makeNode(480, vertices[5]));
-            insert(list, makeNode(1512, vertices[6]));
+            insert(list, makeEdge(1540, vertices[0]));
+            insert(list, makeEdge(480, vertices[5]));
+            insert(list, makeEdge(1512, vertices[6]));
             break;
         case 5: //patna
-            insert(list, makeNode(1580, vertices[0]));
-            insert(list, makeNode(480, vertices[4]));
-            insert(list, makeNode(1117, vertices[6]));
+            insert(list, makeEdge(1580, vertices[0]));
+            insert(list, makeEdge(480, vertices[4]));
+            insert(list, makeEdge(1117, vertices[6]));
             break;
         case 6: //jaipur
-            insert(list, makeNode(1360, vertices[4]));
-            insert(list, makeNode(1117, vertices[5]));
+            insert(list, makeEdge(1360, vertices[4]));
+            insert(list, makeEdge(1117, vertices[5]));
             break;
         default:
             break;
@@ -124,7 +124,7 @@ int main(int argc, char *argv[])
     {
         if (i == from)
             continue;
-        printf("The shortest distance from %s to %s is %d kilometers\n", G[from], G[i], vertices[i]->smallestWeight);
+        printf("The shortest distance from %s to %s is %d kilometers\n", cites[from], cites[i], vertices[i]->smallestWeight);
     }
     return 0;
 }
